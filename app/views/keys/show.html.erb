@@ -19,5 +19,7 @@
   </table>
 </div>
 <div class='nav justify-content-end'>
-  <%= link_to '編集', edit_key_path(@key), class: 'btn btn-primary' %>
+  <%= link_to '編集', edit_key_path(@key), class: 'btn btn-primary mr-3' %>
+  <%= link_to '削除', key_path(@key), method: :delete, 
+    data: {confirm: "「#{@key.key_label}」を削除します。よろしいですか？"}, class: 'btn btn-danger' %>
 </div>
