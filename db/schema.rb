@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_21_075822) do
+ActiveRecord::Schema.define(version: 2020_09_21_092118) do
 
   create_table "keys", force: :cascade do |t|
     t.string "key", null: false
-    t.string "key_name", null: false
+    t.string "key_label", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

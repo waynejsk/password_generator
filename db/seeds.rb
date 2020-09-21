@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+(1..10).each do |i|
+Key.create!(
+  key: ('a'..'z').to_a.shuffle[0..7].join,
+  key_label: "key#{i}",
+  user_id: 1
+)
+end

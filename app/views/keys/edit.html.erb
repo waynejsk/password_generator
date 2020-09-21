@@ -1,0 +1,15 @@
+<h1>パスワード編集</h1>
+
+<%= form_with model: @key, local: true do |f| %>
+  <div class='form-group'>
+    <%= f.label :key_label, 'ラベル' %>
+    <%= f.text_field :key_label, class: 'form-control' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :key, 'パスワード' %>
+    <%= f.text_field :key, class: 'form-control' %>
+  </div>
+  <div class='nav justify-content-end'>
+    <%= f.submit '更新', class: 'btn btn-primary' %>
+  </div>
+<% end %>

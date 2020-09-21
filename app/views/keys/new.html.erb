@@ -1,0 +1,86 @@
+<div>
+  <h1>パスワードを生成</h1>
+</div>
+
+<form action="/keys" method="post">
+  <div class='mb-3'>
+    <div class='form-group'>
+      <label for="key_label">ラベル</label>
+      <input type="text" placeholder='パスワードのラベルを入力' id='key_label' class='form-control' name='key_label'>
+    </div>
+    <div class='form-group'>
+      <label for="result">パスワード</label>
+      <input type="text" placeholder='ここにパスワードが生成されます。手動での編集も可能です' id="result" class='form-control' name='key'>
+    </div>
+    <div id="btn" class='btn btn-primary mt-3 mb-3'>パスワードを生成！</div>
+    <fieldset>
+      <legend>自動生成の設定</legend>
+      <div class='form-group'>
+        文字数 [&nbsp;<label for='slider' id="key_length_label">8</label>&nbsp;]
+        <input type="range" id="slider" value="8" min="1" max="30" class='form-control-range'>
+      </div>
+      <div class='custom-control custom-checkbox'>
+        <input type="checkbox" id="uppercase" class='custom-control-input'>
+        <label for="uppercase" class='custom-control-label'>大文字を含む</label>
+      </div>
+      <div class='custom-control custom-checkbox'>
+        <input type="checkbox" id="numbers" class='custom-control-input'>
+        <label for="numbers" class='custom-control-label'>数字を含む</label>
+      </div>
+    </fieldset>
+  </div>
+
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+  <div class='nav justify-content-end'>
+    <button type="submit" class='btn btn-primary'>保存する</button>
+  </div>
+</form>
+
+  <!-- js -->
+
+<script>
+(function() {
+  'use strict';
+
+  const slider = document.getElementById('slider');
+  const label = document.getElementById('key_length_label');
+  const btn = document.getElementById('btn');
+  const result = document.getElementById('result');
+  const numbers = document.getElementById('numbers');
+  const uppercase = document.getElementById('uppercase');
+
+
+  function getPassword() {
+    const seed_letters = 'abcdefghijklmnopqrstuvwxyz';
+    const seed_uppercase = seed_letters.toUpperCase();
+    const seed_numbers = '0123456789';
+
+    const len = slider.value;
+    let key = '';
+
+    let seed = seed_letters;
+    if(numbers.checked) {
+      seed += seed_numbers;
+    }
+    if(uppercase.checked) {
+      seed += seed_uppercase;
+    }
+
+    for (let i = 0; i < len; i++) {
+      key += seed[Math.floor(Math.random() * seed.length)];
+    };
+
+
+    result.value = key;
+  };
+
+  slider.addEventListener('change', function() {
+    label.textContent = this.value;
+  });
+
+  btn.addEventListener('click', function() {
+    getPassword();
+  });
+
+})();
+</script>
